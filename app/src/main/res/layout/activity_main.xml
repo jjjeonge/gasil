@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/menuButtonFlow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintVertical_bias="1"
+        app:flow_maxElementsWrap="4"
+        app:flow_wrapMode="chain"
+        app:constraint_referenced_ids="homeButton, addGroupButton, myPageButton, settingButton"
+        />
+
+    <ImageButton
+        android:id="@+id/homeButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_home_24"
+        android:background="@color/purple_500"
+        android:clickable="true" />
+
+    <ImageButton
+        android:id="@+id/addGroupButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_group_add_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+    <ImageButton
+        android:id="@+id/myPageButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_person_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+    <ImageButton
+        android:id="@+id/settingButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_settings_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <Spinner
+        android:id="@+id/selectGroupSpinner"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideLine"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.2"/>
+
+    <ImageButton
+        android:id="@+id/addListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/selectGroupSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/guideLine"
+        android:src="@drawable/baseline_add_24"
+        android:background="@drawable/circle_button"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/accountInfoRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/guideLine"
+        app:layout_constraintBottom_toTopOf="@id/menuButtonFlow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

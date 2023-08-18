@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/addListTextView"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="  입출금 내역 추가"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        app:layout_constraintHorizontal_bias="0"
+        android:background="@color/purple_500"/>
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/menuButtonFlow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintVertical_bias="1"
+        app:flow_maxElementsWrap="4"
+        app:flow_wrapMode="chain"
+        app:constraint_referenced_ids="completeButton, cancelButton"
+        />
+
+    <Button
+        android:id="@+id/completeButton"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:text="완료"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/purple_500"
+        android:clickable="true"/>
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:text="취소"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/purple_500"
+        android:clickable="true"
+        tools:ignore="MissingConstraints"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <TextView
+        android:id="@+id/statementTextView"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:text="거래명"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/addListTextView" />
+
+    <EditText
+        android:id="@+id/statementEditText"
+        style="@style/Value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:inputType="text"
+        android:hint="거래명"
+        app:layout_constraintBaseline_toBaselineOf="@id/statementTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="거래일시"
+        app:layout_constraintStart_toStartOf="@id/statementTextView"
+        app:layout_constraintTop_toBottomOf="@id/statementTextView" />
+
+    <androidx.constraintlayout.helper.widget.Layer
+        android:id="@+id/dateLayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="dateValueTextView,dateImageView"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/dateValueTextView"
+        style="@style/Value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:hint="0000/00/00"
+        android:maxLines="1"
+        android:padding="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@id/dateTextView"
+        app:layout_constraintEnd_toStartOf="@+id/dateImageView"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+    <ImageView
+        android:id="@+id/dateImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_edit_calendar_24"
+        app:layout_constraintBottom_toBottomOf="@id/dateTextView"
+        app:layout_constraintEnd_toEndOf="@id/statementEditText"
+        app:layout_constraintTop_toTopOf="@id/dateTextView" />
+
+
+    <TextView
+        android:id="@+id/typeTextView"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="입-출금"
+        app:layout_constraintStart_toStartOf="@id/statementTextView"
+        app:layout_constraintTop_toBottomOf="@id/dateTextView" />
+
+    <RadioGroup
+        android:id="@+id/typeRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/typeTextView"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/typeTextView"
+        app:layout_constraintEnd_toEndOf="@+id/statementEditText"
+        app:layout_constraintHorizontal_bias="1">
+
+        <RadioButton
+            android:id="@+id/typePlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="입금" />
+
+        <RadioButton
+            android:id="@+id/typeMinus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="출금" />
+
+    </RadioGroup>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

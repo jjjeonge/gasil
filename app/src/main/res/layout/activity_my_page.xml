@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/menuButtonFlow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintVertical_bias="1"
+        app:flow_maxElementsWrap="4"
+        app:flow_wrapMode="chain"
+        app:constraint_referenced_ids="homeButton, addGroupButton, myPageButton, settingButton"
+        />
+
+    <ImageButton
+        android:id="@+id/homeButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_home_24"
+        android:background="@color/purple_500"
+        android:clickable="true" />
+
+    <ImageButton
+        android:id="@+id/addGroupButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_group_add_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+    <ImageButton
+        android:id="@+id/myPageButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_person_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+    <ImageButton
+        android:id="@+id/settingButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_settings_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+
+    <ImageButton
+        android:id="@+id/userImageView"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/baseline_person_24"
+        android:background="@drawable/user_image"/>
+
+    <TextView
+        android:id="@+id/userNameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/userImageView"
+        app:layout_constraintTop_toTopOf="@id/userImageView"
+        app:layout_constraintBottom_toBottomOf="@id/userImageView"
+        android:layout_marginStart="30dp"
+        android:text="이름"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"/>
+
+    <ListView
+        android:id="@+id/settingListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/menuButtonFlow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideLine"
+        app:layout_constraintHorizontal_bias="0"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
