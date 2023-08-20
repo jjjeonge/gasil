@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="accounts">
-        <item>A</item>
-        <item>B</item>
-        <item>C</item>
-        <item>D</item>
+        <item>group1</item>
+        <item>group2</item>
+        <item>group3</item>
     </string-array>
 </resources>

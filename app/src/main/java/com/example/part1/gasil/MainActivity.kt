@@ -1,37 +1,41 @@
 package com.example.part1.gasil
 
-import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.part1.gasil.databinding.ActivityMainBinding
-import com.example.part1.gasil.ui.theme.GasilTheme
 
-class MainActivity: ComponentActivity() {
+class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var accountAdapter: AccountInfoAdapter
+    private var selectedInfo:AccountInfo? = null
+    private val updateAddListResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        val isUpdated = result.data?.getBooleanExtra("isUpdated", false) ?: false
+
+        if(result.resultCode == RESULT_OK && isUpdated) {
+            updateAddList()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*binding.selectGroupSpinner.adapter = ArrayAdapter.createFromResource(
+        initRecyclerView()
+
+        binding.selectGroupSpinner.adapter = ArrayAdapter.createFromResource(
             this,
             R.array.accounts,
             android.R.layout.simple_list_item_1
-        )*/
+        )
 
         binding.addGroupButton.setOnClickListener {
             val intent = Intent(this, AddGroupActivity::class.java)
@@ -50,23 +54,31 @@ class MainActivity: ComponentActivity() {
 
         binding.addListButton.setOnClickListener {
             val intent = Intent(this, AddListActivity::class.java)
-            startActivity(intent)
+            updateAddListResult.launch(intent)
         }
 
-        val dummyList = mutableListOf(
-            AccountInfo("2023/08/17", "유수정", "23,000", "출금", "0"),
-            AccountInfo("2023/08/17", "이규란", "32,000", "출금", "0"),
-            AccountInfo("2023/08/17", "유수정", "13,000", "입금", "0"),
-            AccountInfo("2023/08/17", "이규란", "21,000", "입금", "0")
-        )
-
-        accountAdapter = AccountInfoAdapter(dummyList)
-        binding.accountInfoRecyclerView.apply {
-            adapter = accountAdapter
-            layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+        binding.deleteButton.setOnClickListener {
+            delete()
         }
 
     }
+
+    private fun initRecyclerView() {
+        accountAdapter = AccountInfoAdapter(mutableListOf(), this)
+        binding.accountInfoRecyclerView.apply {
+            adapter = accountAdapter
+            layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
+            val dividerItemDecoration = DividerItemDecoration(applicationContext, LinearLayoutManager.VERTICAL)
+            addItemDecoration(dividerItemDecoration)
+        }
+
+        Thread {
+            val list = AppDataBase.getInstance(this)?.accountInfoDao()?.getAll() ?: emptyList()
+            accountAdapter.list.addAll(list)
+            runOnUiThread{ accountAdapter.notifyDataSetChanged() }
+        }.start()
+    }
+
 
     /*private fun showAlertDialog() {
         AlertDialog.Builder(this).apply {
@@ -82,6 +94,37 @@ class MainActivity: ComponentActivity() {
         super.onResume()
         /*getDataUiUpdate()*/
     }
+
+    private fun updateAddList() {
+        Thread {
+            AppDataBase.getInstance(this)?.accountInfoDao()?.getLatestInfo()?.let { info ->
+                accountAdapter.list.add(0, info)
+                runOnUiThread {
+                    accountAdapter.notifyDataSetChanged()
+                }
+            }
+        }.start()
+    }
+
+    private fun delete() {
+        if(selectedInfo == null) return
+
+        Thread {
+            selectedInfo?.let { info ->
+                AppDataBase.getInstance(this)?.accountInfoDao()?.delete(info)
+                runOnUiThread {
+                    accountAdapter.list.remove(info)
+                    accountAdapter.notifyDataSetChanged()
+                    Toast.makeText(this, "삭제가 완료됐습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }.start()
+    }
+
+    override fun onClick(info: AccountInfo) {
+        selectedInfo = info
+    }
+
     /*private fun getDataUiUpdate() {
         with(getSharedPreferences(USER_INFORMATION, Context.MODE_PRIVATE)) {
             binding..text = getString(STATE, null)

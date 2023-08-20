@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:text="거래명"
+        android:text="거래내용"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/addListTextView" />
 
@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
         android:inputType="text"
-        android:hint="거래명"
+        android:hint="거래내용"
         app:layout_constraintBaseline_toBaselineOf="@id/statementTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline" />

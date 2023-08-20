@@ -23,7 +23,7 @@ class AddListActivity: ComponentActivity() {
 
         binding.dateLayer.setOnClickListener {
             val listner = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                binding.dateTextView.text = "$year/${month.inc()}/$dayOfMonth"
+                binding.dateValueTextView.text = "$year/${month.inc()}/$dayOfMonth"
             }
             DatePickerDialog(
                 this,
@@ -35,7 +35,7 @@ class AddListActivity: ComponentActivity() {
         }
 
         binding.completeButton.setOnClickListener {
-            saveData()
+            complete()
             finish()
         }
 
@@ -47,8 +47,8 @@ class AddListActivity: ComponentActivity() {
     private fun saveData() {
         with(getSharedPreferences(USER_INFORMATION, Context.MODE_PRIVATE).edit()) {
             putString(STATE, binding.statementEditText.text.toString())
-            putString(TYPE, getType())
             putString(DATE, binding.dateValueTextView.text.toString())
+            putString(TYPE, getType())
             apply()
         }
 
@@ -60,5 +60,23 @@ class AddListActivity: ComponentActivity() {
         return "$type"
     }
 
+    private fun complete() {
+        val date = binding.dateValueTextView.text.toString()
+        val user = "f"
+        val statement = binding.statementEditText.text.toString()
+        val money = "f"
+        val type = (if(binding.typePlus.isChecked) "입금" else "출금").toString()
+        val sumValue = "f"
+        val info = AccountInfo(date, user, statement, money, type, sumValue)
 
+        Thread {
+            AppDataBase.getInstance(this)?.accountInfoDao()?.insert(info)
+            runOnUiThread {
+                Toast.makeText(this, "저장을 완료했습니다", Toast.LENGTH_SHORT).show()
+            }
+            val intent = Intent().putExtra("isUpdated", true)
+            setResult(RESULT_OK, intent)
+            finish()
+        }.start()
+    }
 }

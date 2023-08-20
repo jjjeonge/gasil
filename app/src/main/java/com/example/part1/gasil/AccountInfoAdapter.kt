@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.part1.gasil.databinding.ItemAccountInfoBinding
 
-class AccountInfoAdapter(private val list: MutableList<AccountInfo>) : RecyclerView.Adapter<AccountInfoAdapter.AccountInfoViewHolder>() {
-
-
+class AccountInfoAdapter(
+    val list: MutableList<AccountInfo>,
+    private val accountInfoClickListener: AccountInfoClickListener? = null,
+    ) : RecyclerView.Adapter<AccountInfoAdapter.AccountInfoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AccountInfoViewHolder {
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -19,14 +20,9 @@ class AccountInfoAdapter(private val list: MutableList<AccountInfo>) : RecyclerV
     }
 
     override fun onBindViewHolder(holder: AccountInfoViewHolder, position: Int) {
-        holder.binding.apply {
-            val info = list[position]
-            dateTextView.text = info.date
-            userTextView.text = info.user
-            moneyTextView.text = info.money
-            typeTextView.text = info.type
-            sumValueTextView.text = info.sumValue
-        }
+        val info = list[position]
+        holder.bind(info)
+        holder.itemView.setOnClickListener { accountInfoClickListener?.onClick(info)}
     }
 
     override fun getItemCount(): Int {
@@ -34,7 +30,21 @@ class AccountInfoAdapter(private val list: MutableList<AccountInfo>) : RecyclerV
     }
 
 
-    class AccountInfoViewHolder(val binding: ItemAccountInfoBinding) : RecyclerView.ViewHolder(binding.root) {
+    class AccountInfoViewHolder(private val binding: ItemAccountInfoBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(info: AccountInfo) {
+            binding.apply {
+                dateTextView.text = info.date
+                userTextView.text = info.user
+                statementTextView.text = info.statement
+                moneyTextView.text = info.money
+                typeTextView.text = info.type
+                sumValueTextView.text = info.sumValue
+            }
+            
+        }
+    }
 
+    interface AccountInfoClickListener{
+        fun onClick(info: AccountInfo)
     }
 }
