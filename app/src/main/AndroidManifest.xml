@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,12 +14,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Gasil"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".AccountInfo"
             android:exported="false" />
         <activity
             android:name=".AccountInfoAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".AccountInfoDao"
             android:exported="false" />
         <activity
             android:name=".AddGroupActivity"
@@ -25,10 +32,19 @@
             android:name=".AddListActivity"
             android:exported="false" />
         <activity
+            android:name=".AppDataBase"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".MyPageActivity"
             android:exported="false" />
         <activity
             android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SigninActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -14,6 +14,12 @@ interface AccountInfoDao {
     @Query("SELECT * from accountInfo ORDER BY id DESC LIMIT 1")
     fun getLatestInfo() : AccountInfo
 
+    @Query("SELECT * from accountInfo ORDER BY date DESC LIMIT 1")
+    fun getRecentInfo() : AccountInfo
+
+    @Query("SELECT SUM(money) from accountInfo")
+    fun sum() : Int
+
     @Insert
     fun insert(info: AccountInfo)
 

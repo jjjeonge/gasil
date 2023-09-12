@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/menuButtonFlow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintVertical_bias="1"
+        app:flow_maxElementsWrap="4"
+        app:flow_wrapMode="chain"
+        app:constraint_referenced_ids="homeButton, addGroupButton, myPageButton, settingButton"
+        />
+
+    <ImageButton
+        android:id="@+id/homeButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_home_24"
+        android:background="@color/purple_500"
+        android:clickable="true"/>
+
+    <ImageButton
+        android:id="@+id/addGroupButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_group_add_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+    <ImageButton
+        android:id="@+id/myPageButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_person_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+    <ImageButton
+        android:id="@+id/settingButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_settings_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+    <TextView
+        android:id="@+id/loginTextView"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="  로그인"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        app:layout_constraintHorizontal_bias="0"
+        android:background="@color/purple_500"/>
+
+    <TextView
+        android:id="@+id/idTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/menuButtonFlow"
+        app:layout_constraintTop_toBottomOf="@id/loginTextView"
+        app:layout_constraintVertical_bias="0.3"
+        android:layout_marginStart="60dp"
+        android:text="ID"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/idValue"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/idTextView"
+        app:layout_constraintBottom_toBottomOf="@id/menuButtonFlow"
+        app:layout_constraintTop_toBottomOf="@id/loginTextView"
+        app:layout_constraintVertical_bias="0.3"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"
+        android:text=""/>
+
+    <TextView
+        android:id="@+id/pwTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/idTextView"
+        app:layout_constraintTop_toBottomOf="@id/idTextView"
+        android:layout_marginTop="20dp"
+        android:text="PW"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/pwValue"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/idValue"
+        app:layout_constraintTop_toBottomOf="@id/idValue"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:text=""/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <Button
+        android:id="@+id/signinButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/idTextView"
+        app:layout_constraintEnd_toEndOf="@id/guideLine"
+        app:layout_constraintTop_toBottomOf="@id/pwTextview"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/purple_500"
+        android:text="회원가입"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guideLine"
+        app:layout_constraintEnd_toEndOf="@id/pwValue"
+        app:layout_constraintTop_toBottomOf="@id/pwTextview"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="5dp"
+        android:backgroundTint="@color/purple_500"
+        android:text="로그인"
+        android:textColor="@color/white"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

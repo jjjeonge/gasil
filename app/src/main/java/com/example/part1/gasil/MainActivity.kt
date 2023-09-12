@@ -6,14 +6,20 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.part1.gasil.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+
 
 class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var accountAdapter: AccountInfoAdapter
     private var selectedInfo:AccountInfo? = null
+    private lateinit var auth: FirebaseAuth
     private val updateAddListResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -24,12 +30,39 @@ class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickList
         }
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        // Initialize Firebase Auth
+        auth = Firebase.auth
 
         initRecyclerView()
+
+        /*val user = Firebase.auth.currentUser
+        user?.let {
+            // Name, email address, and profile photo Url
+            val name = it.displayName
+            val email = it.email
+            val photoUrl = it.photoUrl
+
+            // Check if user's email is verified
+            val emailVerified = it.isEmailVerified
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+            val uid = it.uid
+        }*/
+
+        /*binding.loginButton.setOnClickListener {
+            binding.loginButton.isClickable = false
+            binding.loginButton.isVisible = false
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }*/
 
         binding.selectGroupSpinner.adapter = ArrayAdapter.createFromResource(
             this,
@@ -92,16 +125,29 @@ class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickList
 
     override fun onResume() {
         super.onResume()
+
         /*getDataUiUpdate()*/
+    }
+
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            updateAddList()
+        } else {
+            /*binding.loginButton.isClickable = false
+            binding.loginButton.isVisible = false*/
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun updateAddList() {
         Thread {
             AppDataBase.getInstance(this)?.accountInfoDao()?.getLatestInfo()?.let { info ->
                 accountAdapter.list.add(0, info)
-                runOnUiThread {
-                    accountAdapter.notifyDataSetChanged()
-                }
+                runOnUiThread { accountAdapter.notifyDataSetChanged() }
             }
         }.start()
     }

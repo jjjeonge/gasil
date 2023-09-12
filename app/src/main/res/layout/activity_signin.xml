@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/signinTextView"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="  회원가입"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        app:layout_constraintHorizontal_bias="0"
+        android:background="@color/purple_500"/>
+
+
+    <TextView
+        android:id="@+id/nameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signinTextView"
+        app:layout_constraintVertical_bias="0.3"
+        android:layout_marginStart="60dp"
+        android:text="이름"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/nameValue"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/nameTextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signinTextView"
+        app:layout_constraintVertical_bias="0.3"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/idTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/nameTextView"
+        app:layout_constraintTop_toBottomOf="@id/nameTextView"
+        android:layout_marginTop="20dp"
+        android:text="ID"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/idValue"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/idTextview"
+        app:layout_constraintBaseline_toBaselineOf="@id/idTextview"
+        android:layout_marginStart="20dp"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:id="@+id/pwTextview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/nameTextView"
+        app:layout_constraintTop_toBottomOf="@id/idTextview"
+        android:layout_marginTop="20dp"
+        android:text="PW"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/pwValue"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/idValue"
+        app:layout_constraintBaseline_toBaselineOf="@id/pwTextview"
+        android:textSize="15sp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <Button
+        android:id="@+id/completeButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/idTextview"
+        app:layout_constraintEnd_toEndOf="@id/guideLine"
+        app:layout_constraintTop_toBottomOf="@id/pwTextview"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/purple_500"
+        android:text="완료"
+        android:textColor="@color/white"/>
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guideLine"
+        app:layout_constraintEnd_toEndOf="@id/pwValue"
+        app:layout_constraintTop_toBottomOf="@id/pwTextview"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="5dp"
+        android:backgroundTint="@color/purple_500"
+        android:text="취소"
+        android:textColor="@color/white"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,10 +11,12 @@ import com.example.part1.gasil.databinding.ActivityAddListBinding
 import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import java.text.DecimalFormat
 
 
 class AddListActivity: ComponentActivity() {
     private lateinit var binding: ActivityAddListBinding
+    private val decimalFormat = DecimalFormat("#,###")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,9 +66,9 @@ class AddListActivity: ComponentActivity() {
         val date = binding.dateValueTextView.text.toString()
         val user = "f"
         val statement = binding.statementEditText.text.toString()
-        val money = "f"
+        val money = decimalFormat.format(binding.moneyEditText.toString().toBigDecimal()).toString()
         val type = (if(binding.typePlus.isChecked) "입금" else "출금").toString()
-        val sumValue = "f"
+        val sumValue = (AppDataBase.getInstance(this)?.accountInfoDao()?.sum()).toString()
         val info = AccountInfo(date, user, statement, money, type, sumValue)
 
         Thread {
@@ -79,4 +81,5 @@ class AddListActivity: ComponentActivity() {
             finish()
         }.start()
     }
+
 }

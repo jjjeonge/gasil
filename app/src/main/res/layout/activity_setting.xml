@@ -24,27 +24,28 @@
         android:id="@+id/homeButton"
         style="@style/menu"
         android:src="@drawable/baseline_home_24"
-        android:backgroundTint="@color/purple_500"/>
+        android:background="@color/purple_500"
+        android:clickable="true" />
 
     <ImageButton
         android:id="@+id/addGroupButton"
         style="@style/menu"
         android:src="@drawable/baseline_group_add_24"
-        android:backgroundTint="@color/purple_500"
+        android:background="@color/purple_500"
         tools:ignore="MissingConstraints"/>
 
     <ImageButton
         android:id="@+id/myPageButton"
         style="@style/menu"
         android:src="@drawable/baseline_person_24"
-        android:backgroundTint="@color/purple_500"
+        android:background="@color/purple_500"
         tools:ignore="MissingConstraints"/>
 
     <ImageButton
         android:id="@+id/settingButton"
         style="@style/menu"
         android:src="@drawable/baseline_settings_24"
-        android:backgroundTint="@color/purple_500"
+        android:background="@color/purple_500"
         tools:ignore="MissingConstraints"/>
 
     <TextView
@@ -60,12 +61,6 @@
         android:gravity="center_vertical"
         app:layout_constraintHorizontal_bias="0"
         android:background="@color/purple_500"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1"/>
 
     <ListView
         android:id="@+id/settingListView"

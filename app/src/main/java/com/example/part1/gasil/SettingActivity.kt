@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import com.example.part1.gasil.databinding.ActivitySettingBinding
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "861113421091",
+    "project_id": "gasil-with-kotlin",
+    "storage_bucket": "gasil-with-kotlin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:861113421091:android:8e2442eda6da4d237e9096",
+        "android_client_info": {
+          "package_name": "com.example.part1.gasil"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_QYYwjB7ob8Qj63CF7jl0BImqe6StrL4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

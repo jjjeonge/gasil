@@ -20,7 +20,7 @@
         android:background="@color/purple_500"/>
 
     <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/menuButtonFlow"
+        android:id="@+id/twoButtonFlow"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -122,6 +122,24 @@
         app:layout_constraintEnd_toEndOf="@id/statementEditText"
         app:layout_constraintTop_toTopOf="@id/dateTextView" />
 
+    <TextView
+        android:id="@+id/moneyTextView"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="금액"
+        app:layout_constraintStart_toStartOf="@id/statementTextView"
+        app:layout_constraintTop_toBottomOf="@id/dateTextView" />
+
+    <EditText
+        android:id="@+id/moneyEditText"
+        style="@style/Value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="금액"
+        app:layout_constraintEnd_toEndOf="@id/statementEditText"
+        app:layout_constraintBaseline_toBaselineOf="@id/moneyTextView"/>
 
     <TextView
         android:id="@+id/typeTextView"
@@ -130,7 +148,7 @@
         android:layout_height="wrap_content"
         android:text="입-출금"
         app:layout_constraintStart_toStartOf="@id/statementTextView"
-        app:layout_constraintTop_toBottomOf="@id/dateTextView" />
+        app:layout_constraintTop_toBottomOf="@id/moneyTextView" />
 
     <RadioGroup
         android:id="@+id/typeRadioGroup"
