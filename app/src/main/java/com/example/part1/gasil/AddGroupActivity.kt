@@ -27,10 +27,10 @@ class AddGroupActivity: ComponentActivity() {
             val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
         }
-    }
 
-    override fun onResume() {
-        super.onResume()
-        /*getDataUiUpdate()*/
-    }
-}
+
+        override fun onResume() {
+            super.onResume()
+            /*getDataUiUpdate()*/
+        }
+    }}
