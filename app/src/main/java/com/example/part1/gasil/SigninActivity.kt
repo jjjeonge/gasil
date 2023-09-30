@@ -13,6 +13,7 @@ import com.android.volley.toolbox.Volley
 import com.example.part1.gasil.databinding.ActivitySigninBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import org.json.JSONException
 import org.json.JSONObject
@@ -20,6 +21,7 @@ import org.json.JSONObject
 class SigninActivity: ComponentActivity() {
     private lateinit var binding: ActivitySigninBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +39,16 @@ class SigninActivity: ComponentActivity() {
                         Log.d(TAG, "createUserWithEmail:success")
                         val user = auth.currentUser
                         //updateUI(user)
+
+                        // firestore에 저장
+                        db = FirebaseFirestore.getInstance()
+                        val data = hashMapOf(
+                            "name" to binding.nameValue.text.toString(),
+                            "email" to binding.idValue.text.toString(),
+                            "pw" to binding.pwValue.text.toString()
+                        )
+                        db.collection("Users").document("${binding.idValue.text.toString()}").set(data)
+
                         val intent = Intent(this, LoginActivity::class.java)
                         startActivity(intent)
                     } else {

@@ -8,15 +8,22 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import java.util.concurrent.TimeUnit
 
 
 class SettingActivity: ComponentActivity() {
     private lateinit var binding: ActivitySettingBinding
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = Firebase.auth
+        val user = Firebase.auth.currentUser
 
         binding.homeButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -42,11 +49,17 @@ class SettingActivity: ComponentActivity() {
 
         list.onItemClickListener =
              OnItemClickListener { parent, view, position, id ->
+                if (position == 2) auth.signOut()
+                 val intent = Intent(this, LoginActivity::class.java)
+                 startActivity(intent)
                 Toast.makeText(
                     applicationContext,
                     setting[position],
                     Toast.LENGTH_SHORT
                 ).show()
+
+
+
             }
     }
 

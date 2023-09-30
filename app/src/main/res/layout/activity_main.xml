@@ -78,22 +78,13 @@
         android:clickable="true"/>
 
     <ImageView
-        android:id="@+id/deleteButton"
+        android:id="@+id/showDetailButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/addListButton"
         app:layout_constraintBottom_toBottomOf="@id/addListButton"
-        android:src="@drawable/baseline_delete_24"
-        android:layout_marginStart="16dp" />
-
-    <ImageView
-        android:id="@+id/showDetailButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/deleteButton"
-        app:layout_constraintBottom_toBottomOf="@id/addListButton"
         android:src="@drawable/baseline_remove_red_eye_24"
-        android:layout_marginStart="16dp"/>
+        android:layout_marginStart="16dp" />
 
     <Button
         android:id="@+id/loginButton"

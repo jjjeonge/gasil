@@ -2,9 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/detailTextView"
@@ -13,59 +11,35 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="  세부내역"
-        android:textSize="15dp"
+        android:text="  상세 내역"
+        android:textSize="15sp"
         android:textColor="@color/white"
         android:gravity="center_vertical"
         app:layout_constraintHorizontal_bias="0"
-        android:background="@color/purple_500"/>
+        android:background="@color/purple_500" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/detailRecyclerView"
+    <ImageView
+        android:id="@+id/detailImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/detailTextView"
-        app:layout_constraintBottom_toTopOf="@id/twoButtonFlow"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <androidx.constraintlayout.helper.widget.Flow
-        android:id="@+id/twoButtonFlow"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintVertical_bias="1"
-        app:flow_maxElementsWrap="4"
-        app:flow_wrapMode="chain"
-        app:constraint_referenced_ids="editButton, closeButton"
-        />
-
-    <Button
-        android:id="@+id/editButton"
-        android:layout_height="wrap_content"
-        android:layout_width="0dp"
-        android:text="수정"
-        android:textSize="15sp"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/purple_500"
-        android:clickable="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/detailTextView" />
 
     <Button
         android:id="@+id/closeButton"
         android:layout_height="wrap_content"
-        android:layout_width="0dp"
+        android:layout_width="250dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.97"
         android:text="닫기"
         android:textSize="15sp"
         android:textColor="@color/white"
         android:backgroundTint="@color/purple_500"
-        android:clickable="true"
-        tools:ignore="MissingConstraints"/>
+        android:clickable="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

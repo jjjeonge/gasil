@@ -5,8 +5,51 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/menuButtonFlow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintVertical_bias="1"
+        app:flow_maxElementsWrap="4"
+        app:flow_wrapMode="chain"
+        app:constraint_referenced_ids="homeButton, addGroupButton, myPageButton, settingButton"
+        />
+
+    <ImageButton
+        android:id="@+id/homeButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_home_24"
+        android:background="@color/purple_500"
+        android:clickable="true"/>
+
+    <ImageButton
+        android:id="@+id/addGroupButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_group_add_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+    <ImageButton
+        android:id="@+id/myPageButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_person_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
+    <ImageButton
+        android:id="@+id/settingButton"
+        style="@style/menu"
+        android:src="@drawable/baseline_settings_24"
+        android:background="@color/purple_500"
+        tools:ignore="MissingConstraints"/>
+
     <TextView
-        android:id="@+id/signinTextView"
+        android:id="@+id/loginTextView"
         android:layout_width="0dp"
         android:layout_height="30dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,39 +62,39 @@
         app:layout_constraintHorizontal_bias="0"
         android:background="@color/purple_500"/>
 
-
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signinTextView"
-        app:layout_constraintVertical_bias="0.3"
-        android:layout_marginStart="60dp"
-        android:text="이름"
+        app:layout_constraintStart_toStartOf="@id/idTextView"
+        app:layout_constraintBottom_toTopOf="@id/idTextView"
+        android:layout_marginBottom="20dp"
+        android:text="NAME"
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="@color/black"/>
 
     <EditText
         android:id="@+id/nameValue"
-        android:layout_width="150dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/nameTextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signinTextView"
-        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintBottom_toBottomOf="@id/nameTextView"
+        app:layout_constraintVertical_bias="0.4"
         android:layout_marginStart="20dp"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        android:text=""
+        android:hint="  name"/>
 
     <TextView
-        android:id="@+id/idTextview"
+        android:id="@+id/idTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/nameTextView"
-        app:layout_constraintTop_toBottomOf="@id/nameTextView"
-        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/menuButtonFlow"
+        app:layout_constraintTop_toBottomOf="@id/loginTextView"
+        app:layout_constraintVertical_bias="0.4"
+        android:layout_marginStart="60dp"
         android:text="ID"
         android:textSize="25sp"
         android:textStyle="bold"
@@ -59,19 +102,23 @@
 
     <EditText
         android:id="@+id/idValue"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/idTextview"
-        app:layout_constraintBaseline_toBaselineOf="@id/idTextview"
+        app:layout_constraintStart_toEndOf="@id/idTextView"
+        app:layout_constraintBottom_toBottomOf="@id/menuButtonFlow"
+        app:layout_constraintTop_toBottomOf="@id/loginTextView"
+        app:layout_constraintVertical_bias="0.4"
         android:layout_marginStart="20dp"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        android:text=""
+        android:hint="  Enter your email"/>
 
     <TextView
         android:id="@+id/pwTextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/nameTextView"
-        app:layout_constraintTop_toBottomOf="@id/idTextview"
+        app:layout_constraintStart_toStartOf="@id/idTextView"
+        app:layout_constraintTop_toBottomOf="@id/idTextView"
         android:layout_marginTop="20dp"
         android:text="PW"
         android:textSize="25sp"
@@ -80,11 +127,13 @@
 
     <EditText
         android:id="@+id/pwValue"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/idValue"
-        app:layout_constraintBaseline_toBaselineOf="@id/pwTextview"
-        android:textSize="15sp"/>
+        app:layout_constraintTop_toBottomOf="@id/idValue"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:hint="  Enter your password"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideLine"
@@ -95,9 +144,9 @@
 
     <Button
         android:id="@+id/completeButton"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/idTextview"
+        app:layout_constraintStart_toStartOf="@id/idTextView"
         app:layout_constraintEnd_toEndOf="@id/guideLine"
         app:layout_constraintTop_toBottomOf="@id/pwTextview"
         android:layout_marginTop="30dp"
@@ -108,7 +157,7 @@
 
     <Button
         android:id="@+id/cancelButton"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/guideLine"
         app:layout_constraintEnd_toEndOf="@id/pwValue"

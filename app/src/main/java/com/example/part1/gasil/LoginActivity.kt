@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.core.view.isVisible
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
@@ -31,7 +32,6 @@ class LoginActivity: ComponentActivity() {
         auth = Firebase.auth
 
         binding.loginButton.setOnClickListener {
-            //reqLogin(binding.idValue.text.toString(), binding.pwValue.text.toString())
             auth.signInWithEmailAndPassword(binding.idValue.text.toString(), binding.pwValue.text.toString())
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
@@ -57,6 +57,18 @@ class LoginActivity: ComponentActivity() {
         binding.signinButton.setOnClickListener {
             val intent = Intent(this, SigninActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        } else {
+
         }
     }
 

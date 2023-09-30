@@ -6,9 +6,9 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 
-@Dao
+/*@Dao
 interface AccountInfoDao {
-    @Query("SELECT * from accountInfo ORDER BY id DESC")
+    @Query("SELECT * from 'accountInfo' ORDER BY 'id' DESC")
     fun getAll(): List<AccountInfo>
 
     @Query("SELECT * from accountInfo ORDER BY id DESC LIMIT 1")
@@ -28,4 +28,4 @@ interface AccountInfoDao {
 
     @Update
     fun update(info: AccountInfo)
-}
+}*/

@@ -48,4 +48,72 @@
         android:background="@color/purple_500"
         tools:ignore="MissingConstraints"/>
 
+    <TextView
+        android:id="@+id/addGroupTextView"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="  그룹 추가"
+        android:textSize="15dp"
+        android:textColor="@color/white"
+        android:gravity="center_vertical"
+        app:layout_constraintHorizontal_bias="0"
+        android:background="@color/purple_500"/>
+
+    <EditText
+        android:id="@+id/groupName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintVertical_bias="0.2"
+        android:hint="그룹명"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/groupColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/groupName"
+        app:layout_constraintStart_toStartOf="@id/groupName"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintVertical_bias="0.2"
+        android:hint="그룹색"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="30sp"/>
+
+
+    <Button
+        android:id="@+id/completeButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/keyPadFlow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        android:backgroundTint="@color/purple_500"
+        android:text="완료"
+        android:textColor="@color/white"/>
+
+    <ImageButton
+        android:id="@+id/colorButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_color_lens_24"
+        app:layout_constraintBottom_toBottomOf="@id/groupColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.517"
+        app:layout_constraintStart_toStartOf="@id/groupColor"
+        app:layout_constraintTop_toTopOf="@id/groupColor"
+        android:background="@color/white"/>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
