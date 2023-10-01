@@ -40,7 +40,7 @@ class AddGroupActivity: ComponentActivity() {
 
         binding.completeButton.setOnClickListener {
             complete()
-            finish()
+            //finish()
         }
 
 //        binding.colorButton.setOnClickListener {
@@ -91,18 +91,10 @@ class AddGroupActivity: ComponentActivity() {
         db.collection("Users/${email}/Groups").document("$groupName").set(data)
         val intent = Intent().putExtra("isUpdated", true)
         setResult(RESULT_OK, intent)
-        finish()
+        /*val intent = Intent()
+        setResult(RESULT_OK, intent)
+        finish()*/
+        Toast.makeText(this, "그룹 추가가 완료되었습니다.", Toast.LENGTH_SHORT).show()
 
-
-//        Thread {
-//            AppDataBase.getInstance(this)?.groupDao()?.insert(newGroup)
-//            runOnUiThread {
-//                Toast.makeText(this, "저장을 완료했습니다", Toast.LENGTH_SHORT).show()
-//            }
-//
-//            val intent = Intent().putExtra("isUpdated", true)
-//            setResult(RESULT_OK, intent)
-//            finish()
-//        }.start()
     }
 }

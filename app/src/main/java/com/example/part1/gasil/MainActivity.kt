@@ -4,6 +4,7 @@ import android.accounts.Account
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -31,7 +32,7 @@ import java.lang.reflect.Array
 import java.text.DecimalFormat
 
 
-class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickListener {
+class MainActivity: ComponentActivity()/*, AccountInfoAdapter.AccountInfoClickListener*/ {
     private lateinit var binding: ActivityMainBinding
     private val decimalFormat = DecimalFormat("#,###")
     private lateinit var accountInfoRecyclerView: RecyclerView
@@ -164,6 +165,11 @@ class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickList
             val intent = Intent(this, AddGroupActivity::class.java)
                 .putExtra("userEmail", user!!.email)
             startActivity(intent)
+            /*Intent(this, AddGroupActivity::class.java)
+                .putExtra("userEmail", user!!.email)
+                .let {
+                    updateAddGroupResult.launch(it)
+                }*/
         }
 
         binding.myPageButton.setOnClickListener {
@@ -194,7 +200,7 @@ class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickList
 //        }
 
         binding.showDetailButton.setOnClickListener {
-            val docId = selectedInfo?.id
+            val docId = selectedInfo?.docId
             println(docId)
             val intent = Intent(this, DetailActivity::class.java)
                 .putExtra("currentGroup", selectedGroup)
@@ -228,6 +234,35 @@ class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickList
                     accountInfoRecyclerView.adapter = AccountInfoAdapter(accountInfoArrayList)
                 }
             }
+
+        /*accountInfoAdapter.setOnItemClickListener(object : AccountInfoAdapter.OnItemClickListener{
+            override fun onItemClick(info: AccountInfo) {
+                Intent(this@MainActivity, DetailActivity::class.java).apply {
+                    putExtra("docId", info.docId)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }.run { startActivity(this) }
+            }
+
+        })*/
+
+        accountInfoRecyclerView.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+            override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+                val child = rv.findChildViewUnder(e.x, e.y)
+                val position = rv.getChildAdapterPosition(child!!)
+                selectedInfo = accountInfoArrayList[position]
+                Log.d("터치이벤트", "${selectedInfo!!.docId}")
+
+
+                return false
+            }
+
+            override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+
+            override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+
+            }
+        })
+
 
     }
 
@@ -285,42 +320,6 @@ class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickList
         accountInfoAdapter.notifyDataSetChanged()
     }
 
-    /*private fun initRecyclerView() {
-        accountAdapter = AccountInfoAdapter(mutableListOf())
-        binding.accountInfoRecyclerView.apply {
-            adapter = accountAdapter
-            layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.VERTICAL, false)
-            val dividerItemDecoration = DividerItemDecoration(applicationContext, LinearLayoutManager.VERTICAL)
-            addItemDecoration(dividerItemDecoration)
-        }
-        Thread {
-            val documents = mutableListOf<QueryDocumentSnapshot>()
-            db.collection("group1").get()
-                .addOnSuccessListener { result ->
-                    for (document in result) {
-                        Log.d("현재 문서", document.toString())
-                        documents.add(document)
-                    }
-                }
-            var info = mutableListOf<AccountInfo>()
-            for (document in documents) {
-                db.collection("group1").document("${document.toString()}").get().addOnSuccessListener {
-                    Log.d("현재 문서", document.toString())
-                    val date = it.getString("date")?.toInt()
-                    val user = it.getString("user")
-                    val statement = it.getString("statement")
-                    val money = it.getString("money")?.toInt()
-                    val type = it.getString("type")
-                    val id = document.toString()
-                    val accountInfo = AccountInfo(date, user, statement, money, type, id)
-                    info.add(accountInfo)
-                }
-            }
-            accountAdapter.list.addAll(info)
-            runOnUiThread{ accountAdapter.notifyDataSetChanged() }
-        }.start()
-    }*/
-
 
     /*private fun showAlertDialog() {
         AlertDialog.Builder(this).apply {
@@ -335,10 +334,6 @@ class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickList
 
     override fun onResume() {
         super.onResume()
-//        if (auth.currentUser == null) {
-//            val intent = Intent(this, LoginActivity::class.java)
-//            startActivity(intent)
-//        }
 
         binding.loginButton.isClickable = false
         binding.loginButton.isVisible = false
@@ -354,7 +349,6 @@ class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickList
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
-
 
     }
 
@@ -390,18 +384,6 @@ class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickList
             }*/
     }
 
-    /*private fun updateAddList() {
-        Thread {
-            val selectedGroup = binding.selectGroupSpinner.selectedItem.toString()
-            val currentGroup = db.collection("$selectedGroup")
-
-            AppDataBase.getInstance(this)?.accountInfoDao()?.getLatestInfo()?.let { info ->
-                accountInfoAdapter.list.add(info)
-                runOnUiThread { accountInfoAdapter.notifyDataSetChanged() }
-            }
-        }.start()
-    }*/
-
     private fun delete() {
         if(selectedInfo == null) return
 //        val date = selectedInfo!!.date
@@ -434,9 +416,10 @@ class MainActivity: ComponentActivity(), AccountInfoAdapter.AccountInfoClickList
         }.start()
     }
 
-    override fun onClick(info: AccountInfo) {
+    /*override fun onClick(info: AccountInfo) {
         selectedInfo = info
         Log.d("selected", "info가 선택되었습니다.")
-    }
+        Toast.makeText(this, "선택됨", Toast.LENGTH_SHORT).show()
+    }*/
 }
 

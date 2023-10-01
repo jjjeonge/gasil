@@ -8,9 +8,12 @@ import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.part1.gasil.databinding.ItemAccountInfoBinding
+import com.google.firebase.firestore.DocumentSnapshot
 import java.text.DecimalFormat
+import kotlin.coroutines.coroutineContext
 
 class AccountInfoAdapter(
     val list: MutableList<AccountInfo>,
@@ -28,15 +31,8 @@ class AccountInfoAdapter(
         val info = list[position]
         holder.bind(info)
         //holder.itemView.setOnClickListener { accountInfoClickListener?.onClick(it, position)}
-        holder.itemView.setOnClickListener { accountInfoClickListener?.onClick(info) }
+        //holder.itemView.setOnClickListener { accountInfoClickListener?.onClick(info) }
 
-//        holder.itemView.setOnClickListener(View.OnClickListener {
-//            fun onClick(view: View) {
-//                val intent = Intent(holder.itemView.context, DetailActivity::class.java)
-//                intent.putExtra("id", info.id)
-//                holder.itemView.context.startActivity(intent)
-//            }
-//        })
     }
 
     override fun getItemCount(): Int {
@@ -44,7 +40,7 @@ class AccountInfoAdapter(
     }
 
 
-    class AccountInfoViewHolder(private val binding: ItemAccountInfoBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class AccountInfoViewHolder(private val binding: ItemAccountInfoBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private val decimalFormat = DecimalFormat("#,###")
 
@@ -58,21 +54,37 @@ class AccountInfoAdapter(
                 moneyTextView.text = decimalFormat.format(info.money.toString().toBigDecimal())
                 typeTextView.text = info.type
                 userTextView.setTextColor(Color.parseColor("${info.color}"))
-                docIdTextView.text = info.id
+                docIdTextView.text = info.docId
                 sumTextView.text = info.color
+
+                /*val pos = adapterPosition
+                if(pos!= RecyclerView.NO_POSITION)
+                {
+                    itemView.setOnClickListener {
+                        accountInfoClickListener?.onClick(info)
+                    }
+                }*/
             }
+
             
         }
     }
 
-    interface AccountInfoClickListener{
-        fun onClick(info: AccountInfo)
+    /*interface OnItemClickListener{
+        fun onItemClick(info: AccountInfo)
     }
+    private var listener : OnItemClickListener? = null
+    fun setOnItemClickListener(listener : OnItemClickListener) {
+        this.listener = listener
+    }*/
 
+    /*interface AccountInfoClickListener {
+        fun onClick(info: AccountInfo)
+    }*/
+//
 //    fun setItemClickListener(accountInfoClickListener: AccountInfoClickListener) {
 //        this.accountInfoClickListener = accountInfoClickListener
 //    }
 //
-    private val accountInfoClickListener: AccountInfoClickListener? = null
-//    // (4) setItemClickListener로 설정한 함수 실행
+//    private val accountInfoClickListener: AccountInfoClickListener? = null
 }

@@ -121,11 +121,14 @@ class AddListActivity: ComponentActivity() {
 
         binding.completeButton.setOnClickListener {
             complete()
-            finish()
+            //finish()
+
         }
 
         binding.cancelButton.setOnClickListener {
-            finish()
+            //finish()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -206,7 +209,7 @@ class AddListActivity: ComponentActivity() {
             }
             val intent = Intent().putExtra("isUpdated", true)
             setResult(RESULT_OK, intent)
-            finish()
+            //finish()
         }.start()
 
     }

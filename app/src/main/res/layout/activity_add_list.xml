@@ -48,7 +48,7 @@
         android:id="@+id/cancelButton"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
-        android:text="취소"
+        android:text="돌아가기"
         android:textSize="15sp"
         android:textColor="@color/white"
         android:backgroundTint="@color/purple_500"

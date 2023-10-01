@@ -35,7 +35,7 @@ class DetailActivity: ComponentActivity() {
             pathRef.downloadUrl.addOnSuccessListener { uri->
                 Glide.with(this).load(uri).into(binding.detailImageView)
             }.addOnFailureListener {
-                Log.d("error", "오류")
+                Log.d("error", "사진 불러오기 오류")
                 Log.d("currentGroup", "$currentGroup")
                 Log.d("docId", "$docId")
             }
