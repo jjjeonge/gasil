@@ -12,3 +12,6 @@ data class AccountInfo (
     var type : String? = "", //입금 or 지출
     var user : String? = "", //팀원
 )
+
+
+
