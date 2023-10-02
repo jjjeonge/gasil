@@ -87,7 +87,6 @@ fun String.getDate(): String {
 }
 
 //private fun String.isFloatAndWhole() = this.matches("\\d*\\.\\d*".toRegex())
-//private fun String.isFloatAndWhole() = this.matches("([0-9]*[,|.])?[0-9]+".toRegex())
 
 private fun String.isFloat(): Boolean {
     try {
