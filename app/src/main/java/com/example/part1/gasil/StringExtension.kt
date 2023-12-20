@@ -33,17 +33,20 @@ fun String.findFloat(): ArrayList<Int> {
 fun String.firstLine(): String {
     if (this.isEmpty()) return ""
     var statement: String = ""
-    val list = this.split("\n", " ", ":", "[", "]")
+    val list = this.split("\n", " ", ":", "[", "]", "\"", ",")
     println(list)
     for (i in 0 until list.size) {
-        if (!(list[i] == "영수증" || list[i] == "코드" || list[i].contains("신용") ||
+        if (!(list[i].contains("영수증") || list[i] == "코드" || list[i].contains("신용") ||
                     list[i].contains("카드") || list[i].contains("주문") ||
                     list[i].contains("전표") || list[i].contains("온라인") ||
                     list[i].contains("결제") || list[i].contains("가맹정") ||
                     list[i].contains("매출") || list[i].contains("사업자") ||
                     list[i].contains("거래") || list[i].contains("(주)") ||
+                    list[i].contains("발행") || list[i].contains("매장") ||
+                    list[i].contains("단말") || list[i].contains("KICC") ||
                     list[i].contains("진동벨") || list[i] == "" ||
                     list[i] =="KOCES" || list[i].contains("가게") ||
+                    (list[i] =="Easy" && list[i+1] == "Check") || (list[i] =="Check" && list[i-1] == "Easy") ||
                     list[i].contains("번호") ||
                     (list[i].contains("번") && list[i+1].contains("호")) ||
                     (list[i].contains("호") && list[i-1].contains("번")) ||
